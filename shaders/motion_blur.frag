@@ -9,15 +9,15 @@ out vec4 frag_color;
 
 void main() {
     
-    float q = 24.0;
+    const int sample_count = 24;
     vec2 p = FlutterFragCoord().xy / u_size ; 
     vec2 v = u_velocity/ u_size / 2;
 
     float o = -pow(p.y * 2 - 1, 6) + 1;
     vec4 new_p = vec4(0);
-    for (int i = 0; i < q; i++) {
-        new_p += texture(u_texture, vec2(p.x +   (( (o - 1) * length(v.y) * 6 *  ((p.x  - 0.5))) ) + (v.x * i) / q, p.y + 0.01 + (v.y * i) / q));
+    for (int i = 0; i < sample_count; i++) {
+        new_p += texture(u_texture, vec2(p.x +   (( (o - 1) * length(v.y) * 6 *  ((p.x  - 0.5))) ) + (v.x * float(i)) / float(sample_count), p.y + 0.01 + (v.y * float(i)) / float(sample_count)));
     }
-    new_p /= q;
+    new_p /= float(sample_count);
     frag_color = new_p;
 }
