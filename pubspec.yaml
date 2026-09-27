@@ -66,9 +66,8 @@ flutter:
     - assets/images/vinyl/vinyl.png
     - assets/images/smoke/bottom_logo.png
     - assets/images/smoke/main_logo.png
-    - shaders/motion_blur.frag
 
-
+  # Flutter 3.47 rejects a fragment shader listed under both assets and shaders.
   shaders:
     - shaders/motion_blur.frag
     - shaders/simple.frag
